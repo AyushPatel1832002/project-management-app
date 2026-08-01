@@ -1,27 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: hsl(250, 100%, 70%);
-  --primary-glow: hsla(250, 100%, 70%, 0.4);
-  --secondary: hsl(280, 100%, 70%);
-  --accent: hsl(330, 100%, 65%);
-  --bg-dark: hsl(222, 47%, 11%);
-  --bg-card: hsla(222, 47%, 15%, 0.7);
-  --bg-sidebar: hsl(222, 47%, 13%);
+  --primary: #8b7cff;
+  --primary-glow: rgba(139, 124, 255, 0.3);
+  --secondary: #5c7cfa;
+  --accent: #ff7eb6;
+  --bg-dark: #0b1020;
+  --bg-card: rgba(20, 28, 52, 0.82);
+  --bg-sidebar: #10172b;
   --text-main: hsl(210, 40%, 98%);
   --text-muted: hsl(215, 20%, 65%);
-  --border: hsla(210, 40%, 98%, 0.1);
-  --glass-bg: hsla(210, 40%, 98%, 0.03);
-  --glass-border: hsla(210, 40%, 98%, 0.08);
-  --glass-shine: hsla(210, 40%, 98%, 0.05);
+  --border: rgba(148, 163, 184, 0.14);
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(148, 163, 184, 0.14);
+  --glass-shine: rgba(255, 255, 255, 0.16);
   --success: hsl(150, 100%, 60%);
   --warning: hsl(45, 100%, 60%);
   --danger: hsl(0, 100%, 65%);
   --info: hsl(200, 100%, 65%);
   
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  --panel-radius: 20px;
-  --card-radius: 24px;
+  --panel-radius: 18px;
+  --card-radius: 16px;
 }
 
 [data-theme='light'] {
@@ -51,10 +51,9 @@ body {
   /* Animated mesh gradient background */
   position: relative;
   background-image: 
-    radial-gradient(at 0% 0%, hsla(250, 100%, 70%, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(280, 100%, 70%, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(330, 100%, 65%, 0.15) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(200, 100%, 65%, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(100, 84, 220, 0.18) 0px, transparent 42%),
+    radial-gradient(at 100% 0%, rgba(43, 117, 198, 0.13) 0px, transparent 38%),
+    radial-gradient(at 100% 100%, rgba(221, 74, 145, 0.1) 0px, transparent 42%);
   background-attachment: fixed;
 }
 
@@ -83,6 +82,11 @@ button {
   background: none;
   font-family: inherit;
   transition: all 0.2s ease;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid rgba(139, 124, 255, 0.45);
+  outline-offset: 2px;
 }
 
 /* Glassmorphism utility */
@@ -126,10 +130,13 @@ button {
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 11px 18px;
+  border-radius: 10px;
   font-weight: 600;
-  box-shadow: 0 4px 14px 0 var(--primary-glow);
+  box-shadow: 0 8px 22px -8px var(--primary-glow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-primary:hover {
@@ -142,7 +149,7 @@ button {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px 16px;
-  color: white;
+  color: var(--text-main);
   outline: none;
   width: 100%;
 }

@@ -1,7 +1,9 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .dashboard-header {
@@ -11,7 +13,7 @@
 }
 
 .welcome h2 {
-  font-size: 32px;
+  font-size: clamp(26px, 3vw, 36px);
   font-weight: 800;
   margin-bottom: 6px;
   letter-spacing: -0.5px;
@@ -21,6 +23,8 @@
   -webkit-text-fill-color: transparent;
 }
 
+.wave { -webkit-text-fill-color: initial; }
+
 .welcome p {
   color: var(--text-muted);
 }
@@ -28,16 +32,16 @@
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 16px;
 }
 
 .stat-card {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 24px;
+  padding: 20px;
   border-radius: 24px;
-  background: hsla(222, 47%, 20%, 0.3);
+  background: linear-gradient(145deg, rgba(30, 41, 72, 0.7), rgba(18, 26, 49, 0.55));
   border: 1px solid var(--glass-border);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -76,15 +80,17 @@
 }
 
 .stat-value {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
 }
 
 .projects-section {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
+
+.section-header h3 { font-size: 18px; letter-spacing: -0.3px; }
 
 .section-header {
   display: flex;
@@ -120,19 +126,28 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
+  gap: 16px;
 }
 
 .project-card {
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   cursor: pointer;
-  background: hsla(222, 47%, 20%, 0.3);
+  background: linear-gradient(145deg, rgba(30, 41, 72, 0.72), rgba(18, 26, 49, 0.58));
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card h4 { font-size: 16px; letter-spacing: -0.2px; }
+
+@media (max-width: 560px) {
+  .dashboard { gap: 22px; }
+  .dashboard-header { align-items: flex-start; gap: 16px; flex-direction: column; }
+  .dashboard-header .btn-primary { width: 100%; justify-content: center; }
+  .stats-grid, .projects-grid { grid-template-columns: 1fr; }
 }
 
 .project-card:hover {

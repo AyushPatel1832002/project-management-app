@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/Dashboard';
 import ProjectBoard from './pages/ProjectBoard';
 import MainLayout from './components/layout/MainLayout';
@@ -18,6 +19,7 @@ function App() {
       <div className="app-container">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/*"
             element={

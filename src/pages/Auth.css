@@ -77,6 +77,18 @@
   text-align: center;
 }
 
+.auth-mark {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  color: white;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 10px 24px -8px var(--primary-glow);
+}
+
 .auth-title {
   font-size: 28px;
   font-weight: 700;
@@ -157,4 +169,26 @@
 .auth-footer button {
   color: var(--primary);
   font-weight: 600;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+}
+
+.signup-card { max-width: 470px; gap: 26px; }
+
+@media (max-width: 520px) {
+  .auth-card { padding: 32px 22px; margin: 16px; }
 }
