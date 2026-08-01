@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: hsl(250, 100%, 70%);
+  --primary-glow: hsla(250, 100%, 70%, 0.4);
+  --secondary: hsl(280, 100%, 70%);
+  --accent: hsl(330, 100%, 65%);
+  --bg-dark: hsl(222, 47%, 11%);
+  --bg-card: hsla(222, 47%, 15%, 0.7);
+  --bg-sidebar: hsl(222, 47%, 13%);
+  --text-main: hsl(210, 40%, 98%);
+  --text-muted: hsl(215, 20%, 65%);
+  --border: hsla(210, 40%, 98%, 0.1);
+  --glass-bg: hsla(210, 40%, 98%, 0.03);
+  --glass-border: hsla(210, 40%, 98%, 0.08);
+  --glass-shine: hsla(210, 40%, 98%, 0.05);
+  --success: hsl(150, 100%, 60%);
+  --warning: hsl(45, 100%, 60%);
+  --danger: hsl(0, 100%, 65%);
+  --info: hsl(200, 100%, 65%);
+  
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --panel-radius: 20px;
+  --card-radius: 24px;
+}
+
+[data-theme='light'] {
+  --primary: #4f46e5;
+  --bg-dark: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-sidebar: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow: hidden; /* Use flex layout for app */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Animated mesh gradient background */
+  position: relative;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(250, 100%, 70%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(280, 100%, 70%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(330, 100%, 65%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(200, 100%, 65%, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-shine), transparent);
+}
+
+.glass-shadow {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 var(--primary-glow);
+}
+
+.input-field {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  outline: none;
+  width: 100%;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

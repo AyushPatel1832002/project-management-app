@@ -1,0 +1,324 @@
+.project-board {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.board-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.board-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.board-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.board-avatars img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-dark);
+  margin-left: -12px;
+}
+
+.board-avatars img:first-child { margin-left: 0; }
+
+.add-member-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px dashed var(--border);
+  color: var(--text-muted);
+  font-size: 18px;
+  margin-left: -12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+.board-stats {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.action-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.board-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 16px;
+}
+
+.boards-scroll-area {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+  min-width: max-content;
+}
+
+.board-column {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: hsla(222, 47%, 15%, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 24px;
+  height: 100%;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.board-column.over {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: var(--primary);
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.column-title {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.2px;
+}
+
+.column-title .count {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 10px;
+  border-radius: 20px;
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
+}
+
+.task-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-right: 4px;
+}
+
+.add-task-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  transition: all 0.2s ease;
+}
+
+.add-task-btn:hover {
+  background: var(--glass-bg);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.add-board-column {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 16px;
+  color: var(--text-muted);
+  border: 2px dashed var(--border);
+  background: transparent;
+}
+
+.add-board-column:hover {
+  background: var(--glass-bg);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Task Card Styling */
+.task-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: grab;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 1px solid var(--glass-border);
+  background: hsla(222, 47%, 20%, 0.3);
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  background: hsla(222, 47%, 25%, 0.4);
+  border-color: var(--primary);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
+}
+
+.task-card:active { cursor: grabbing; }
+
+.task-card.dragging { 
+  opacity: 0.2; 
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-priority {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-high { 
+  background: hsla(0, 100%, 65%, 0.15); 
+  color: var(--danger);
+  box-shadow: inset 0 0 0 1px hsla(0, 100%, 65%, 0.2);
+}
+.priority-medium { 
+  background: hsla(45, 100%, 60%, 0.15); 
+  color: var(--warning); 
+  box-shadow: inset 0 0 0 1px hsla(45, 100%, 60%, 0.2);
+}
+.priority-low { 
+  background: hsla(150, 100%, 60%, 0.15); 
+  color: var(--success); 
+  box-shadow: inset 0 0 0 1px hsla(150, 100%, 60%, 0.2);
+}
+
+.task-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.task-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: hsla(0, 0%, 100%, 0.03);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.task-assignee {
+  position: relative;
+}
+
+.mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.mini-avatar:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.mini-avatar.empty {
+  background: hsla(0, 0%, 100%, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  border: 1px dashed var(--glass-border);
+}
+
+.task-more {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.task-more:hover {
+  background: hsla(0, 0%, 100%, 0.08);
+  color: var(--text-main);
+}
