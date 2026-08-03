@@ -73,6 +73,7 @@ const SignupPage = () => {
           <p>Already have an account? <Link to="/login">Log in</Link></p>
           <Link className="back-link" to="/login"><ArrowLeft size={14} /> Back to login</Link>
         </div>
+        
       </motion.div>
     </div>
   );

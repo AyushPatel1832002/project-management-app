@@ -4,17 +4,23 @@ import { useTasks } from '../../hooks/useTasks';
 import { useModal } from '../../hooks/useModal';
 import { useFilterAndSort } from '../../hooks/useFilterAndSort';
 import { useBoardDrop } from '../../hooks/useDragAndDrop';
+import { useAuth } from '../../hooks/useAuth';
+import { canManageTasks } from '../../utils/permissions';
 import TaskCard from './TaskCard';
 
 const BoardColumn = ({ board }) => {
   const { tasks: allTasks } = useTasks(board.id);
   const { openModal } = useModal();
   const { applyFilters } = useFilterAndSort();
+  const { user } = useAuth();
   const [isOver, drop] = useBoardDrop(board.id);
 
   const filteredTasks = applyFilters(allTasks);
 
   const handleAddTask = () => {
+    if (!canManageTasks(user?.role)) {
+      return;
+    }
     openModal('task', { boardId: board.id, mode: 'create' });
   };
 
@@ -39,10 +45,12 @@ const BoardColumn = ({ board }) => {
         ))}
       </div>
 
-      <button className="add-task-btn" onClick={handleAddTask}>
-        <Plus size={18} />
-        <span>Add Task</span>
-      </button>
+      {canManageTasks(user?.role) && (
+        <button className="add-task-btn" onClick={handleAddTask}>
+          <Plus size={18} />
+          <span>Add Task</span>
+        </button>
+      )}
     </div>
   );
 };

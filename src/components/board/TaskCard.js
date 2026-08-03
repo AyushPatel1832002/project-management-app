@@ -2,15 +2,20 @@ import React from 'react';
 import { Clock, MessageSquare, MoreHorizontal, User } from 'lucide-react';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 import { useModal } from '../../hooks/useModal';
+import { useAuth } from '../../hooks/useAuth';
+import { canManageTasks } from '../../utils/permissions';
 import './Board.css';
 
 const TaskCard = ({ task, boardId }) => {
   const { drag, isDragging } = useDragAndDrop(task.id, boardId);
   const { openModal } = useModal();
-
+  const { user } = useAuth();
 
   const handleEdit = (e) => {
     e.stopPropagation();
+    if (!canManageTasks(user?.role)) {
+      return;
+    }
     openModal('task', { ...task, mode: 'edit' });
   };
 
@@ -33,9 +38,11 @@ const TaskCard = ({ task, boardId }) => {
         <span className={`task-priority ${getPriorityClass(task.priority)}`}>
           {task.priority}
         </span>
-        <button className="task-more glass" onClick={handleEdit}>
-          <MoreHorizontal size={14} />
-        </button>
+        {canManageTasks(user?.role) && (
+          <button className="task-more glass" onClick={handleEdit}>
+            <MoreHorizontal size={14} />
+          </button>
+        )}
       </div>
 
       <h4 className="task-title">{task.title}</h4>

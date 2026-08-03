@@ -8,25 +8,37 @@ export const useAuth = () => {
   const login = async (email, password) => {
     dispatch(loginStart());
     try {
-      // Shimmer/Mock delay
       await new Promise(resolve => setTimeout(resolve, 800));
-      
-      // Dummy check
-      if (email && password) {
+
+      if (email?.trim().toLowerCase() === 'admin@example.com' && password === 'password') {
         const dummyUser = {
           id: '1',
           name: 'Ayush Patel',
-          email: email,
-          role: email === 'admin@example.com' ? 'Admin' : 'User',
+          email: email.trim(),
+          role: 'Admin',
           avatar: `https://i.pravatar.cc/150?u=${email}`
         };
         const token = 'fake-jwt-token-' + Date.now();
-        
+
         dispatch(loginSuccess({ user: dummyUser, token }));
         return { success: true };
-      } else {
-        throw new Error('Invalid credentials');
       }
+
+      if (email?.trim() && password) {
+        const dummyUser = {
+          id: Date.now().toString(),
+          name: email.trim().split('@')[0],
+          email: email.trim(),
+          role: 'User',
+          avatar: `https://i.pravatar.cc/150?u=${email}`
+        };
+        const token = 'fake-jwt-token-' + Date.now();
+
+        dispatch(loginSuccess({ user: dummyUser, token }));
+        return { success: true };
+      }
+
+      throw new Error('Please enter valid credentials');
     } catch (err) {
       dispatch(loginFailure(err.message));
       return { success: false, error: err.message };

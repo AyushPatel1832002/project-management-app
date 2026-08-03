@@ -4,6 +4,8 @@ import { X, Calendar, User, Tag, Trash2, Save } from 'lucide-react';
 import { useModal } from '../../hooks/useModal';
 import { useTasks } from '../../hooks/useTasks';
 import { useUsers } from '../../hooks/useUsers';
+import { useAuth } from '../../hooks/useAuth';
+import { canManageTasks } from '../../utils/permissions';
 import './Modal.css';
 
 
@@ -11,6 +13,7 @@ const TaskModal = () => {
   const { isOpen, closeModal, modalData, openModal } = useModal();
   const { createTask, editTask, removeTask } = useTasks(modalData?.boardId);
   const { users } = useUsers();
+  const { user } = useAuth();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -36,10 +39,14 @@ const TaskModal = () => {
 
   if (!isOpen('task')) return null;
 
-  const isViewOnly = modalData.mode === 'view';
+  const isViewOnly = modalData.mode === 'view' || !canManageTasks(user?.role);
 
   const handleSave = (e) => {
     e.preventDefault();
+    if (!canManageTasks(user?.role)) {
+      closeModal();
+      return;
+    }
     const taskData = {
       title,
       description,
@@ -59,6 +66,9 @@ const TaskModal = () => {
   };
 
   const handleDelete = () => {
+    if (!canManageTasks(user?.role)) {
+      return;
+    }
     if (window.confirm('Are you sure you want to delete this task?')) {
       removeTask(modalData.id);
       closeModal();
@@ -163,7 +173,7 @@ const TaskModal = () => {
               </div>
             )}
 
-            {isViewOnly && (
+            {isViewOnly && canManageTasks(user?.role) && (
               <div className="modal-footer">
                 <button 
                   type="button" 

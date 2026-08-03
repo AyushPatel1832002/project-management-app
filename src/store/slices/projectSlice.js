@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+
+const createId = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
 const initialState = {
   projects: {
@@ -23,7 +24,7 @@ const projectSlice = createSlice({
   reducers: {
     // Project Reducers
     addProject: (state, action) => {
-      const { id = uuidv4(), name, description } = action.payload;
+      const { id = createId(), name, description } = action.payload;
       state.projects.ids.push(id);
       state.projects.entities[id] = { id, name, description, boardIds: [] };
       if (!state.selectedProjectId) state.selectedProjectId = id;
@@ -63,7 +64,7 @@ const projectSlice = createSlice({
 
     // Board Reducers
     addBoard: (state, action) => {
-      const { projectId, id = uuidv4(), title } = action.payload;
+      const { projectId, id = createId(), title } = action.payload;
       if (state.projects.entities[projectId]) {
         state.boards.ids.push(id);
         state.boards.entities[id] = { id, title, projectId, taskIds: [] };
@@ -90,7 +91,7 @@ const projectSlice = createSlice({
 
     // Task Reducers
     addTask: (state, action) => {
-      const { boardId, id = uuidv4(), ...taskData } = action.payload;
+      const { boardId, id = createId(), ...taskData } = action.payload;
       if (state.boards.entities[boardId]) {
         state.tasks.ids.push(id);
         state.tasks.entities[id] = { id, boardId, ...taskData };

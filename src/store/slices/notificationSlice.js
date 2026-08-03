@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+
+const createId = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
 const initialState = [];
 
@@ -9,7 +10,7 @@ const notificationSlice = createSlice({
   reducers: {
     addNotification: (state, action) => {
       const { message, type = 'info', duration = 3000 } = action.payload;
-      const id = uuidv4();
+      const id = createId();
       state.push({ id, message, type, duration });
     },
     removeNotification: (state, action) => {
@@ -24,3 +25,4 @@ const notificationSlice = createSlice({
 export const { addNotification, removeNotification, clearNotifications } = notificationSlice.actions;
 
 export default notificationSlice.reducer;
+  
