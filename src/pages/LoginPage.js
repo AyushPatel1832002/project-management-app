@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('admin@example.com');
   const [password, setPassword] = useState('password');
   const { login, loading, error } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
